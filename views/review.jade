@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  p Une review
+
+  ul
+  each val in review
+    li= val.name
+    li= val.placeType
+
+
+

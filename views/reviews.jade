@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  p Liste des reviews
+
+  #{reviews}
+
+  ul
+  each val in reviews
+    li= val.name
+    li= val.placeType
+
+
+
