@@ -34,7 +34,7 @@ router.get('/:id', function(req, res, next) {
 	{ 
 		if(req.param('id') == review.id){
 			val=[review];
-			res.statusCode = 201;
+			res.status(200).send('OK');
   			res.render('review', { review: val });
   		}
 	});
@@ -51,6 +51,7 @@ router.post('/', function (req, res) {
    };
 
    reviews.push(newReview);
+   res.status(201).send('Created');
    res.send(reviews);
 });
 
@@ -61,9 +62,11 @@ router.delete('/:id', function (req, res) {
 		if(req.param('id') == review.id){
 			var index = reviews.indexOf(review);
 			reviews.splice(index, 1);
+			res.status(204).send('No content');
 			res.send(reviews);
   		}
 	});
+  res.status(404).send('Not found');
 });
 
 /* PUT reviews */
@@ -76,8 +79,8 @@ router.put('/:id', function (req, res) {
 		  	review.placeType= req.body.placeType,
 		  	review.stars= req.body.stars
 
-		  	 var index = reviews.indexOf(review);
-
+		  	var index = reviews.indexOf(review);
+		  	res.status(200).send('OK');
 
   		}
 	});
