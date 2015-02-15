@@ -1,12 +1,25 @@
 extends layout
 
 block content
-  p Une review
+	p Une review
 
-  ul
-  each val in review
-    li= val.name
-    li= val.placeType
+	table
+		tr
+			a.fa.fa-pencil-square-o
+		tr
+			td= review.name
+		tr
+			td= review.placeType
+		tr
+			td
+				- for (var x = 0; x <  review.stars; x++)
+					i.fa.fa-star
+		tr
+			td
+				a(href='/reviews/') ALL REVIEWS
+
+
+
 
 
 
