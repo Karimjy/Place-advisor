@@ -3,20 +3,21 @@ extends layout
 block content
 	p Une review
 
-	table
-		tr
-			a.fa.fa-pencil-square-o
-		tr
-			td= review.name
-		tr
-			td= review.placeType
-		tr
-			td
-				- for (var x = 0; x <  review.stars; x++)
-					i.fa.fa-star
-		tr
-			td
-				a(href='/reviews/') ALL REVIEWS
+	div#review
+		a.fa.fa-pencil-square-o(onclick="showEdit(true)")
+		h1= review.name
+		h3= review.placeType
+		- for (var x = 0; x <  review.stars; x++)
+			i.fa.fa-star
+		br
+		a(href='/reviews/') ALL REVIEWS
+
+	div#edit(style="display:none")
+		input(id='name', type='text', value='#{review.name}')
+		input(id='placeType', type='text', value='#{review.placeType}')
+		input(id='stars', type='text', value='#{review.stars}')
+		input(type='button', onclick='updateReview("#{review._id}")' value='OK')
+		input(type='button', onclick='showEdit(false)' value='Close')
 
 
 

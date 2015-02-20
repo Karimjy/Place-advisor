@@ -34,7 +34,6 @@ router.get('/:id', function(req, res, next) {
         } else {
             var accept = req.get('Accept');
             if (accept.indexOf("html")) {
-            	console.log(review);
                 res.render('review', {
                     review: review
                 });
@@ -58,7 +57,7 @@ router.post('/', function(req, res) {
         if (err) return handleError(err);
     })
     res.send(newReview);
-    res.status(201).send('Created');
+
 });
 
 /* DELETE reviews */
@@ -90,6 +89,44 @@ router.put('/:id', function(req, res) {
 
         res.status(200).send('OK');
     })
+});
+
+/* GET A TOP REVIEWS */
+
+router.get('/top/places', function(req, res, next) {
+    Reviews.find().where("stars", 3).limit(3).exec(
+        function(err, reviews) {
+            if (err) {
+                res.status(500).send({
+                    'error': err
+                });
+            } else {
+
+                var accept = req.get('Accept');
+                if (accept.indexOf("html")) {
+                    res.render('topPlaces', {
+                        reviews: reviews
+                    });
+                } else {
+                    res.send(reviews);
+                }
+            }
+        });
+});
+
+/* SEARCH */
+
+router.get('/s/search?name=:name', function(req, res, next) {
+    Reviews.find({"name": req.params.name}, function(err, reviews) {
+        if (err) {
+            res.status(500).send({
+                'error': err
+            });
+        } else {
+
+            res.send(reviews);
+        }
+    });
 });
 
 module.exports = router;

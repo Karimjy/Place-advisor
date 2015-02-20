@@ -1,0 +1,24 @@
+extends layout
+
+block content
+	h1 Top reviews
+
+	if reviews
+		table
+			each review in reviews
+				tr
+					td
+						a(href='/reviews/' + review._id) +
+						td= review.name
+						td= review.placeType
+						td
+							- for (var x = 0; x <  review.stars; x++)
+								i.fa.fa-star
+						td
+							a.fa.fa-trash-o(onClick='deleteReview("#{review._id}")')
+	a(href='/reviews/') ALL REVIEWS
+
+
+
+
+
