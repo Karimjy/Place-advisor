@@ -114,19 +114,4 @@ router.get('/top/places', function(req, res, next) {
         });
 });
 
-/* SEARCH */
-
-router.get('/s/search?name=:name', function(req, res, next) {
-    Reviews.find({"name": req.params.name}, function(err, reviews) {
-        if (err) {
-            res.status(500).send({
-                'error': err
-            });
-        } else {
-
-            res.send(reviews);
-        }
-    });
-});
-
 module.exports = router;
