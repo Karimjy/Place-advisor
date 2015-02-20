@@ -2,7 +2,7 @@
 
 var mongoose = require('mongoose');
 
-var mongolabStringConnexion = 'mongodb://localhost:27017/ws-restapi';
+var mongolabStringConnexion = process.env.MONGO_STRING_CONNECTION || 'mongodb://localhost:27017/ws-restapi';
 
 mongoose.connect(mongolabStringConnexion);
 
